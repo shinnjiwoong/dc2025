@@ -16,7 +16,7 @@ const websites = [
     {
         id: 2,
         title: '오이고수',
-        url: 'http://httpbin.org',
+        url: 'https://dc2025-oigosu.vercel.app/',
         fontSize: '6dvw',
         hoverColor: '#4ECDC4', // 청록색
     },
