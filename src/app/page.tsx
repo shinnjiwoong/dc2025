@@ -9,7 +9,7 @@ const websites = [
     {
         id: 1,
         title: '민진찬의 상호작용',
-        url: 'https://example.com',
+        url: 'https://chani017.github.io/sideroad/',
         fontSize: '5.5dvw',
         hoverColor: '#FF6B6B', // 빨간색
     },
