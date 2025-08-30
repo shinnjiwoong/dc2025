@@ -9,7 +9,7 @@ const websites = [
     {
         id: 1,
         title: '민진찬의 상호작용',
-        url: 'http://example.com',
+        url: 'https://example.com',
         fontSize: '5.5dvw',
         hoverColor: '#FF6B6B', // 빨간색
     },
@@ -23,7 +23,7 @@ const websites = [
     {
         id: 3,
         title: '사바사',
-        url: 'http://jsonplaceholder.typicode.com',
+        url: 'https://jsonplaceholder.typicode.com',
         fontSize: '8dvw',
         hoverColor: '#45B7D1', // 파란색
     },
@@ -42,19 +42,11 @@ export default function Home() {
     const [backgroundColor, setBackgroundColor] = useState('#FFFFFF'); // 기본 흰색
 
     const handleWebsiteSelect = (website: (typeof websites)[0]) => {
-        if (selectedWebsite.id !== website.id) {
-            // 다른 웹사이트를 선택한 경우
-            setIsFrameVisible(false);
+        // 모든 URL을 새 탭에서 열기
+        window.open(website.url, '_blank', 'noopener,noreferrer');
 
-            // 페이드 아웃 후 웹사이트 변경
-            setTimeout(() => {
-                setSelectedWebsite(website);
-                setIsFrameVisible(true);
-            }, 250);
-        } else {
-            // 같은 웹사이트를 선택한 경우에도 보여주기
-            setIsFrameVisible(true);
-        }
+        // 선택된 웹사이트 업데이트 (시각적 피드백용)
+        setSelectedWebsite(website);
     };
 
     const handleMouseEnter = (website: (typeof websites)[0]) => {
@@ -100,8 +92,8 @@ export default function Home() {
                     </div>
                 </div>
 
-                {/* iFrame 영역 */}
-                <div className="bg-transparent h-full">
+                {/* iFrame 영역 - 숨김 처리 */}
+                <div className="bg-transparent h-full hidden">
                     <div className="h-full">
                         <WebsiteFrame
                             url={selectedWebsite.url}

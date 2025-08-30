@@ -38,7 +38,8 @@ export default function WebsiteFrame({
             return () => clearTimeout(timer);
         } else {
             // 페이드 아웃: 즉시 숨김
-            setIsVisible(false);
+            window.open(url, '_blank', 'noopener,noreferrer');
+            // setIsVisible(false);
         }
     }, [isShow, isHttpUrl, url]);
 
