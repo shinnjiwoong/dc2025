@@ -16,9 +16,21 @@ export default function WebsiteFrame({
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
+    const [isHttpUrl, setIsHttpUrl] = useState(false);
+
+    useEffect(() => {
+        // HTTP URL인지 확인
+        setIsHttpUrl(url.startsWith('http://'));
+    }, [url]);
 
     useEffect(() => {
         if (isShow) {
+            if (isHttpUrl) {
+                // HTTP URL인 경우 새 탭에서 열기
+                window.open(url, '_blank', 'noopener,noreferrer');
+                return;
+            }
+
             // 페이드 인: 약간의 지연 후 표시
             const timer = setTimeout(() => {
                 setIsVisible(true);
@@ -28,7 +40,7 @@ export default function WebsiteFrame({
             // 페이드 아웃: 즉시 숨김
             setIsVisible(false);
         }
-    }, [isShow]);
+    }, [isShow, isHttpUrl, url]);
 
     const handleLoad = () => {
         setIsLoading(false);
@@ -39,6 +51,30 @@ export default function WebsiteFrame({
         setIsLoading(false);
         setHasError(true);
     };
+
+    // HTTP URL인 경우 안내 메시지 표시
+    if (isHttpUrl && isShow) {
+        return (
+            <div className="w-full h-full bg-white flex items-center justify-center hidden">
+                <div className="text-center p-8">
+                    <p className="text-lg font-kigsans font-ultrabold text-gray-800 mb-4">
+                        {title}
+                    </p>
+                    <p className="text-sm font-kigsans font-ultralight text-gray-600 mb-6">
+                        HTTP 사이트는 새 탭에서 열립니다
+                    </p>
+                    <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block px-6 py-3 bg-blue-600 text-white text-sm font-kigsans font-ultrabold rounded hover:bg-blue-700 transition-colors"
+                    >
+                        새 탭에서 열기
+                    </a>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div
@@ -55,8 +91,8 @@ export default function WebsiteFrame({
                             웹사이트를 불러올 수 없습니다
                         </p>
                         <p className="text-xs font-kigsans font-ultralight text-gray-500 mb-4">
-                            localhost에서 HTTPS 웹사이트는 보안상의 이유로
-                            차단될 수 있습니다
+                            HTTPS 사이트에서 HTTP 콘텐츠는 보안상의 이유로
+                            차단됩니다
                         </p>
                         <a
                             href={url}

@@ -3,8 +3,7 @@ import './globals.css';
 import CustomCursor from '@/components/CustomCursor';
 
 export const metadata: Metadata = {
-    title: 'iFrame 웹사이트 뷰어',
-    description: '4개의 외부 웹사이트를 iFrame으로 볼 수 있는 웹사이트',
+    title: 'DESIGN CAMP 2025 - 일상의실천',
 };
 
 export default function RootLayout({
