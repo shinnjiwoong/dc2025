@@ -23,7 +23,7 @@ const websites = [
     {
         id: 3,
         title: '사바사',
-        url: 'https://jsonplaceholder.typicode.com',
+        url: 'https://dc2025-jokuman.vercel.app/',
         fontSize: '8dvw',
         hoverColor: '#45B7D1', // 파란색
     },
